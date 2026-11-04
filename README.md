@@ -1,1 +1,10 @@
-# yaroslav.github.io
+# Портфолио
+
+Личный сайт начинающего веб-разработчика: https://fuzzyrobotyt.github.io
+
+## Проекты
+- **Онлайн-запись клиентов**: `booking/`, Supabase и админ-панель
+- **Менеджер расходов**: `expenses/`, JavaScript и localStorage
+- **Игры** (платформер, кликер): `games/`
+
+Подробности в README каждой папки.
