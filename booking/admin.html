@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex">
+  <title>Админка · записи</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="top">
+    <a href="index.html">← К форме записи</a>
+    <h1>Админ-панель</h1>
+  </header>
+
+  <main class="wrap">
+    <form id="login" class="panel" hidden>
+      <h2>Вход</h2>
+      <label>Почта
+        <input type="email" id="email" required autocomplete="username">
+      </label>
+      <label>Пароль
+        <input type="password" id="password" required autocomplete="current-password">
+      </label>
+      <button type="submit" class="btn">Войти</button>
+      <p id="login-msg" class="msg" role="status"></p>
+    </form>
+
+    <section id="panel" hidden>
+      <div class="bar">
+        <span id="who" class="muted"></span>
+        <button type="button" id="logout" class="link-btn">Выйти</button>
+      </div>
+
+      <div class="filters panel">
+        <label>Статус
+          <select id="status-filter">
+            <option value="all">Все</option>
+            <option value="new">Новые</option>
+            <option value="confirmed">Подтверждённые</option>
+            <option value="cancelled">Отменённые</option>
+          </select>
+        </label>
+        <label class="check"><input type="checkbox" id="show-past"> Показать прошедшие</label>
+      </div>
+
+      <p id="msg" class="msg" role="status"></p>
+      <ul id="list" class="bookings"></ul>
+      <p id="empty" class="muted" hidden>Заявок нет.</p>
+    </section>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="admin.js"></script>
+</body>
+</html>

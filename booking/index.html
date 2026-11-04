@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Онлайн-запись</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="icon" href="data:,">
+</head>
+<body>
+  <header class="top">
+    <a href="../index.html#projects">← На сайт</a>
+    <h1>Онлайн-запись</h1>
+    <p class="muted">Демо-проект: используй вымышленные данные.</p>
+  </header>
+
+  <main class="wrap">
+    <form id="booking-form" class="panel">
+      <label>Услуга
+        <select id="service" required></select>
+      </label>
+      <label>Дата
+        <input type="date" id="date" required>
+      </label>
+      <div class="field">
+        <span class="label">Время</span>
+        <div id="slots" class="slots"></div>
+      </div>
+      <label>Имя
+        <input type="text" id="name" maxlength="80" required>
+      </label>
+      <label>Телефон
+        <input type="tel" id="phone" maxlength="30" placeholder="Номер для связи" required>
+      </label>
+      <input type="text" id="website" class="hp" tabindex="-1" autocomplete="off" aria-hidden="true">
+      <button type="submit" class="btn" id="send">Записаться</button>
+      <p id="msg" class="msg" role="status"></p>
+    </form>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="app.js"></script>
+</body>
+</html>
