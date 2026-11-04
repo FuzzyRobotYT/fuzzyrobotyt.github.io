@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html  lang="ru">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.80">
+        <title>Менеджер расходов</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="icon" href="data:">
+    </head>
+    <body>
+        <header class="top">
+            <a href="../index.html#projects">На сайт</a>
+            <h1>Менеджер расходов</h1>
+            <div class="filter">
+                <label>Показать за период
+                    <select id="month-filter"></select>
+                </label>
+            </div>
+        </header>
+        <main class="layout">
+            <section class="panel">
+                <h2>Новая трата</h2>
+                <form id="expense-form">
+                    <label>Сумма
+                        <input type="number" id="amount" min="0.01" step="0.01" placeholder="0.00" required>
+                    </label>
+                    <label>Категория
+                        <select id="category" required>
+                            <option value="Еда">Еда</option>
+                            <option value="Транспорт">Транспорт</option>
+                            <option value="Развлечения">Развлечения</option>
+                            <option value="Дом">Дом</option>
+                            <option value="Прочее">Прочее</option>
+                        </select>
+                    </label>
+                    <label>Дата
+                        <input type="date" id="date" required>
+                    </label>
+                    <label>Заметка
+                        <input type="text" id="note" maxlength="60" placeholder="Необязательно">
+                    </label>
+                    <button type="submit" class="btn">Добавить</button>
+                </form>
+            </section>
+            <section class="panel">
+                <h2>Итоги</h2>
+                <p class="total">Всего: <strong id="total">0.00</strong></p>
+                <ul id="by-category" class="bars"></ul>
+            </section>
+            <section class="panel wide">
+                <h2>Траты</h2>
+                <ul id="list" class="list"></ul>
+                <p id="empty" class="muted">Пока нет трат. Добавь первую!</p>
+            </section>
+        </main>
+        <script src="app.js"></script>
+    </body>
+</html>

@@ -1,0 +1,85 @@
+:root {
+  --bg: #0f1226;
+  --card: #1b1f3b;
+  --text: #eef0ff;
+  --muted: #aab0d6;
+  --accent: #7c6cff;
+  --danger: #ff6b81;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  line-height: 1.5;
+}
+a { color: var(--accent); }
+
+.top { max-width: 900px; margin: 0 auto; padding: 20px 20px 0; }
+.top h1 { margin-top: 8px; }
+
+.layout {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
+.panel { background: var(--card); border-radius: 16px; padding: 20px; }
+.panel h2 { margin-bottom: 12px; font-size: 1.1rem; }
+.wide { grid-column: 1 / -1; }
+
+label { display: block; margin-bottom: 12px; color: var(--muted); font-size: 0.9rem; }
+input, select {
+  display: block;
+  width: 100%;
+  margin-top: 4px;
+  padding: 10px 12px;
+  border: 1px solid #343a68;
+  border-radius: 10px;
+  background: var(--bg);
+  color: var(--text);
+  font: inherit;
+}
+input:focus, select:focus { outline: 2px solid var(--accent); }
+
+.btn {
+  width: 100%;
+  padding: 12px;
+  border: 0;
+  border-radius: 999px;
+  background: var(--accent);
+  color: #fff;
+  font: inherit;
+  font-weight: 700;
+  cursor: pointer;
+}
+.btn:hover { filter: brightness(1.1); }
+
+.total { font-size: 1.2rem; margin-bottom: 12px; }
+.muted { color: var(--muted); }
+
+.list, .bars { list-style: none; }
+.item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-bottom: 1px solid #2a2f58;
+}
+.item div { flex: 1; }
+.item small { display: block; color: var(--muted); }
+.del { border: 0; background: none; color: var(--danger); font-size: 1.1rem; cursor: pointer; }
+
+.bars li { margin-bottom: 10px; }
+.bar { height: 8px; border-radius: 99px; background: var(--bg); overflow: hidden; margin-top: 4px; }
+.bar i { display: block; height: 100%; background: var(--accent); }
+
+@media (max-width: 700px) {
+  .layout { grid-template-columns: 1fr; }
+}
+.row { display: flex; justify-content: space-between; font-size: 0.95rem; }
+.filter { max-width: 260px; margin-top: 12px; }
