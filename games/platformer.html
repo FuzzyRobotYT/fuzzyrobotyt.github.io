@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Платформер</title>
+<style>
+:root{--bg:#f4f1ea;--text:#26231f;--sky:#bfe3f5;--ground:#5a8f4a;--plat:#8a6a4a;--coin:#e8b400;--enemy:#c0392b;--hero:#2e6fd6;--flag:#d6336c;--btn:#e4dfd3;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1c1b19;--text:#ece8df;--sky:#1d2b3a;--ground:#4a7a3c;--plat:#7a5c3e;--coin:#f2c230;--enemy:#e5574a;--hero:#5b9bff;--flag:#f06595;--btn:#33312d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1c1b19;--text:#ece8df;--sky:#1d2b3a;--ground:#4a7a3c;--plat:#7a5c3e;--coin:#f2c230;--enemy:#e5574a;--hero:#5b9bff;--flag:#f06595;--btn:#33312d;color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,"Segoe UI",sans-serif;display:flex;flex-direction:column;align-items:center;padding:16px 12px}
+h1{font-size:20px;margin:0 0 8px}
+canvas{width:100%;max-width:720px;height:auto;border-radius:10px;background:var(--sky)}
+p{margin:8px 0;font-size:14px;text-align:center}
+.pad{display:flex;gap:10px;margin-top:6px}
+.pad button{font-size:22px;width:64px;height:52px;border:0;border-radius:10px;background:var(--btn);color:var(--text);touch-action:none}
+</style>
+</head>
+<body>
+<h1>Платформер</h1>
+<canvas id="g" width="640" height="360"></canvas>
+<p id="hud">Монеты: 0 / 0</p>
+<p>Стрелки или A/D — движение, пробел или W — прыжок. Прыгай на врагов сверху, дойди до флага.</p>
+<div class="pad"><button id="bl">◀</button><button id="bu">▲</button><button id="br">▶</button></div>
+<p><a href="../index.html#projects" style="color:inherit">← Вернуться на сайт</a></p>
+<script>
+const c=document.getElementById('g'),x=c.getContext('2d'),W=640,H=360,WORLD=1650;
+const css=getComputedStyle(document.documentElement),col=n=>css.getPropertyValue(n).trim();
+const keys={};
+addEventListener('keydown',e=>{keys[e.code]=true;if(e.code==='Space'||e.code.startsWith('Arrow'))e.preventDefault()});
+addEventListener('keyup',e=>keys[e.code]=false);
+[['bl','ArrowLeft'],['bu','ArrowUp'],['br','ArrowRight']].forEach(([id,k])=>{
+  const b=document.getElementById(id);
+  b.addEventListener('pointerdown',()=>keys[k]=true);
+  ['pointerup','pointerleave','pointercancel'].forEach(ev=>b.addEventListener(ev,()=>keys[k]=false));
+});
+const platforms=[[0,320,500,40],[560,320,300,40],[900,320,750,40],[200,250,100,16],[350,190,100,16],[600,240,120,16],[760,180,100,16],[1000,250,120,16],[1180,190,100,16],[1350,250,120,16]];
+const coinPos=[[240,220],[390,160],[640,210],[800,150],[1040,220],[1220,160],[1390,220],[700,290],[1100,290]];
+let p,coins,enemies,total=coinPos.length,got=0,won=false;
+function reset(full){
+  p={x:40,y:200,w:24,h:32,vx:0,vy:0,on:false};
+  if(full){
+    coins=coinPos.map(([a,b])=>({x:a,y:b,r:8,taken:false}));
+    enemies=[{x:620,y:300,w:24,h:20,min:570,max:830,d:1},{x:1000,y:300,w:24,h:20,min:920,max:1300,d:1},{x:1400,y:300,w:24,h:20,min:1300,max:1600,d:-1}];
+    got=0;won=false;
+  }
+}
+reset(true);
+const hit=(a,b)=>a.x<b.x+b.w&&a.x+a.w>b.x&&a.y<b.y+b.h&&a.y+a.h>b.y;
+function update(){
+  if(won){if(keys.Enter)reset(true);return}
+  const L=keys.ArrowLeft||keys.KeyA,R=keys.ArrowRight||keys.KeyD,U=keys.Space||keys.ArrowUp||keys.KeyW;
+  p.vx=((R?1:0)-(L?1:0))*3;
+  if(U&&p.on){p.vy=-11;p.on=false}
+  p.vy+=0.55;
+  p.x+=p.vx;
+  for(const [a,b,w,h] of platforms){const r={x:a,y:b,w,h};if(hit(p,r)){p.x=p.vx>0?a-p.w:a+w}}
+  p.x=Math.max(0,Math.min(WORLD-p.w,p.x));
+  p.y+=p.vy;p.on=false;
+  for(const [a,b,w,h] of platforms){const r={x:a,y:b,w,h};if(hit(p,r)){if(p.vy>0){p.y=b-p.h;p.on=true}else p.y=b+h;p.vy=0}}
+  if(p.y>H+80)reset(false);
+  for(const k of coins)if(!k.taken&&Math.hypot(p.x+p.w/2-k.x,p.y+p.h/2-k.y)<k.r+14){k.taken=true;got++}
+  for(let i=enemies.length-1;i>=0;i--){
+    const e=enemies[i];e.x+=e.d*1.2;if(e.x<e.min||e.x>e.max)e.d*=-1;
+    if(hit(p,e)){
+      if(p.vy>0&&p.y+p.h-e.y<16){enemies.splice(i,1);p.vy=-8}else reset(false);
+    }
+  }
+  if(p.x>1560)won=true;
+  document.getElementById('hud').textContent='Монеты: '+got+' / '+total;
+}
+function draw(){
+  const cam=Math.max(0,Math.min(WORLD-W,p.x-W/2));
+  x.fillStyle=col('--sky');x.fillRect(0,0,W,H);
+  x.save();x.translate(-cam,0);
+  x.fillStyle=col('--ground');
+  for(const [a,b,w,h] of platforms){x.fillStyle=b>=320?col('--ground'):col('--plat');x.fillRect(a,b,w,h)}
+  x.fillStyle=col('--coin');
+  for(const k of coins)if(!k.taken){x.beginPath();x.arc(k.x,k.y,k.r,0,7);x.fill()}
+  x.fillStyle=col('--enemy');
+  for(const e of enemies)x.fillRect(e.x,e.y,e.w,e.h);
+  x.fillStyle=col('--flag');x.fillRect(1600,250,4,70);x.fillRect(1604,250,28,18);
+  x.fillStyle=col('--hero');x.fillRect(p.x,p.y,p.w,p.h);
+  x.restore();
+  if(won){
+    x.fillStyle='rgba(0,0,0,.55)';x.fillRect(0,0,W,H);
+    x.fillStyle='#fff';x.font='bold 32px system-ui,sans-serif';x.textAlign='center';
+    x.fillText('Победа!',W/2,H/2-6);
+    x.font='16px system-ui,sans-serif';x.fillText('Монет: '+got+' из '+total+'. Enter — сыграть ещё раз',W/2,H/2+24);
+  }
+}
+(function loop(){update();draw();requestAnimationFrame(loop)})();
+</script>
+</body>
+</html>
