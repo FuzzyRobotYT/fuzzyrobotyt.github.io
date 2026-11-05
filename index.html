@@ -1,80 +1,113 @@
 <!DOCTYPE html>
-<html  lang="ru"
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ярослав  - начинающий веб-разработчик</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Ярослав — начинающий веб-разработчик</title>
+  <meta name="description" content="Портфолио начинающего веб-разработчика: игры, менеджер расходов, онлайн-запись с базой данных и админ-панелью.">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Ярослав — начинающий веб-разработчик">
+  <meta property="og:description" content="Портфолио: игры, менеджер расходов, онлайн-запись с базой данных.">
+  <meta property="og:url" content="https://fuzzyrobotyt.github.io/">
+  <meta property="og:image" content="https://fuzzyrobotyt.github.io/images/preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext y='.9em' font-size='90'%3E💻%3C/text%3E%3C/svg%3E">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header class="header">
-        <a class="logo" href="#top">Ярослав</a>
-        <nav>
-            <a href="#about">Обо мне</a>
-            <a href="#skills">Навыки</a>
-            <a href="#projects">Проекты</a>
-            <a href="#contact">Контакты</a>
-        </nav>
-    </header>
+  <header class="header">
+    <a class="logo" href="#top">Ярослав</a>
+    <nav>
+      <a href="#about">Обо мне</a>
+      <a href="#skills">Навыки</a>
+      <a href="#projects">Проекты</a>
+      <a href="#contact">Контакты</a>
+    </nav>
+  </header>
 
-    <main id="top">
-        <section class="hero">
-            <h1>Привет! Я Ярослав</h1>
-            <p>Я начинающий веб-разработчик, увлеченный созданием красивых и функциональных веб-сайтов.</p>
-            <a class="button" href="#projects">Посмотреть мои проекты</a>
-        </section>
+  <main id="top">
+    <section class="hero">
+      <h1>Привет! Я Ярослав</h1>
+      <p>Я начинающий веб-разработчик, увлечённый созданием красивых и функциональных веб-сайтов.</p>
+      <a class="button" href="#projects">Посмотреть мои проекты</a>
+    </section>
 
-        <section id="about">
-            <h2>Обо мне</h2>
-            <p>Я - начинающий веб-разработчик с страстью к созданию современных и удобных веб-сайтов. У меня есть базовые знания HTML, CSS и JavaScript, и я постоянно учусь новому.</p>
-        </section>
+    <section id="about">
+      <h2>Обо мне</h2>
+      <p>Я — начинающий веб-разработчик с страстью к созданию современных и удобных веб-сайтов. У меня есть базовые знания HTML, CSS и JavaScript, и я постоянно учусь новому.</p>
+    </section>
 
-        <section id="skills">
-            <h2>Навыки</h2>
-            <ul>
-                <li>HTML5</li>
-                <li>CSS</li>
-                <li>JavaScript</li>
-                <li>Python</li>
-                <li>C++ (основы)</li>
-            </ul>
-        </section>
+    <section id="skills">
+      <h2>Навыки</h2>
+      <ul class="skills">
+        <li>HTML5</li>
+        <li>CSS</li>
+        <li>JavaScript</li>
+        <li>Python</li>
+        <li>C++ (основы)</li>
+        <li>Supabase / PostgreSQL</li>
+        <li>GitHub Pages</li>
+      </ul>
+    </section>
 
-        <section id="projects">
-            <h2>Проекты</h2>
-            <div class="cards">
-                <article class="card">
-                    <img src="images/platformer.png" alt="Платформер">
-                    <h3>Платформер</h3>
-                    <p>Браузерная игра на JavaScript: прыжки, монеты, враги.</p>
-                    <a class="button small" href="games/platformer.html">Играть</a>
-                </article>
-                <article class="card">
-                    <img src="images/clicker.png" alt="Кликер">
-                    <h3>Кликер "Кристаллы"</h3>
-                    <p>Игра с уровнями, достижениями, бонусами и магазином.</p>
-                    <a class="button small" href="games/clicker.html">Играть</a>
-                </article>
-                <article class="card">
-                    <img src="images/expenses.png" alt="Менеджер расходов">
-                    <h3>Менеджер расходов</h3>
-                    <p>Учёт трат с категориями, итогами и фильтром по месяцам. Данные хранятся в браузере.</p>
-                    <a class="button small" href="expenses/index.html">Открыть</a>
-                </article>
-                <article class="card">
-                    <img src="images/booking.png" alt="Скриншот онлайн-записи">
-                    <h3>Онлайн-запись клиентов</h3>
-                    <p>Форма с выбором свободного времени, база данных Supabase и админ-панель с входом. Демо: используй вымышленные данные.</p>
-                    <a class="button small" href="booking/index.html">Открыть</a>
-                </article>
-            </div>
-        </section>
-        <section id="contact">
-            <h2>Контакты</h2>
-            <p>Почта: <a href="mailto:stasovskyyaroslav@gmail.com">stasovskyyaroslav@gmail.com</a></p>
-        </section>
-    </main>
-    <footer>
-        <p>© 2026 Ярослав. Все права защищены.</p>
-    </footer>
+    <section id="projects">
+      <h2>Проекты</h2>
+      <p class="lead">Проекты созданы в процессе обучения с помощью ИИ-ассистента. В README каждого проекта описано, как всё устроено.</p>
+      <div class="cards">
+        <article class="card">
+          <img src="images/platformer.png" alt="Скриншот игры-платформера">
+          <h3>Платформер</h3>
+          <p>Браузерная игра на JavaScript: прыжки, монеты, враги.</p>
+          <ul class="tags"><li>JavaScript</li><li>Canvas</li></ul>
+          <div class="links">
+            <a class="button small" href="games/platformer.html">Играть</a>
+            <a class="button small ghost" href="https://github.com/fuzzyrobotyt/fuzzyrobotyt.github.io/tree/main/games" target="_blank" rel="noopener">Код</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/clicker.png" alt="Скриншот игры-кликера">
+          <h3>Кликер «Кристаллы»</h3>
+          <p>Игра с уровнями, достижениями, бонусами и магазином (тестовая имитация).</p>
+          <ul class="tags"><li>JavaScript</li><li>SVG</li><li>Web Audio</li></ul>
+          <div class="links">
+            <a class="button small" href="games/clicker.html">Играть</a>
+            <a class="button small ghost" href="https://github.com/fuzzyrobotyt/fuzzyrobotyt.github.io/tree/main/games" target="_blank" rel="noopener">Код</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/expenses.png" alt="Скриншот менеджера расходов">
+          <h3>Менеджер расходов</h3>
+          <p>Учёт трат с категориями, итогами и фильтром по месяцам. Данные хранятся в браузере.</p>
+          <ul class="tags"><li>JavaScript</li><li>localStorage</li></ul>
+          <div class="links">
+            <a class="button small" href="expenses/index.html">Открыть</a>
+            <a class="button small ghost" href="https://github.com/fuzzyrobotyt/fuzzyrobotyt.github.io/tree/main/expenses" target="_blank" rel="noopener">Код</a>
+          </div>
+        </article>
+
+        <article class="card">
+          <img src="images/booking.png" alt="Скриншот формы онлайн-записи">
+          <h3>Онлайн-запись клиентов</h3>
+          <p>Форма с выбором свободного времени, база данных Supabase и админ-панель с входом. Демо: используй вымышленные данные.</p>
+          <ul class="tags"><li>JavaScript</li><li>Supabase</li><li>PostgreSQL</li><li>Auth</li></ul>
+          <div class="links">
+            <a class="button small" href="booking/index.html">Открыть</a>
+            <a class="button small ghost" href="https://github.com/fuzzyrobotyt/fuzzyrobotyt.github.io/tree/main/booking" target="_blank" rel="noopener">Код</a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section id="contact">
+      <h2>Контакты</h2>
+      <p>Почта: <a href="mailto:stasovskyyaroslav@gmail.com">stasovskyyaroslav@gmail.com</a></p>
+    </section>
+  </main>
+
+  <footer>
+    <p>© 2026 Ярослав. Все права защищены.</p>
+  </footer>
 </body>
+</html>
